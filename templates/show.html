@@ -1,0 +1,135 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+    <link rel="stylesheet"
+        href="{% static 'plugins/bootstrap-datetimepicker-1.9.0/css/bootstrap-datetimepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+    <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-datetimepicker-1.9.0/js/bootstrap-datetimepicker.js' %}"></script>
+    <script
+        src="{% static 'plugins/bootstrap-datetimepicker-1.9.0/js/locales/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+    <style>
+        .textstyle {
+            font-size: 100px;
+            text-align: center;
+            margin: 50px auto 50px;
+        }
+
+        .bodier {
+            font-size: 145px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="textstyle" id="box">{{ time_msg }}</div>
+    <div class="row">
+        <div class="col-xs-2 col-xs-offset-2">
+            <table class="table table-bordered">
+                <tbody class="bodier">
+                    {% for obj in disclass_monday %}
+                    <tr>
+                        <td>{{ obj }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-2">
+            <table class="table table-bordered">
+                <tbody class="bodier">
+                    {% for obj in disclass_tuesday %}
+                    <tr>
+                        <td>{{ obj }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-2">
+            <table class="table table-bordered">
+                <tbody class="bodier">
+                    {% for obj in disclass_wednesday %}
+                    <tr>
+                        <td>{{ obj }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-2">
+            <table class="table table-bordered">
+                <tbody class="bodier">
+                    {% for obj in disclass_thursday %}
+                    <tr>
+                        <td>{{ obj }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-2">
+            <table class="table table-bordered">
+                <tbody class="bodier">
+                    {% for obj in disclass_friday %}
+                    <tr>
+                        <td>{{ obj }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="textstyle" id="time_difference">现在是{{ class_now }}</div>
+    <div class="textstyle" id="time_difference">现在距{{ class_next }}还有{{ d_hour }}时{{ d_min }}分</div>
+    <!-- <a href="javascript:location.reload();">点击重新载入页面</a> -->
+    <script type="text/javascript">
+        <!-- 时间格式化 -->
+        var f = 1;
+        while (f > 0) {
+            var element = document.getElementById("classtime");
+            if (element == null) { f = 0 } else { f = 1 };
+            var e1 = element.textContent;
+            var l_e1 = e1.length;
+            var e2 = new String();
+            switch (l_e1) {
+                case 1:
+                    e2 = '00:0' + e1;
+                    break;
+                case 2:
+                    e2 = '00:' + e1;
+                    break;
+                case 3:
+                    e2 = '0' + e1.substring(0, 1) + ':' + e1.substring(1,);
+                    break;
+                case 4:
+                    e2 = e1.substring(0, 2) + ':' + e1.substring(2,);
+                    break;
+            }
+            document.getElementById("classtime").id = 'classtime_new';
+            element.innerHTML = e2;
+        }
+    </script>
+    <!-- <script type="text/javascript">
+        var now_class = document.getElementById("{{ week_day }}{{ now_class_id }}");
+        now_class.style.backgroundColor = "black";
+        now_class.style.color = "white";
+    </script> -->
+    <script>
+        var id = setInterval(function function_name() {
+            location.reload()
+        }, 1000)
+    </script>
+</body>
+
+</html>
