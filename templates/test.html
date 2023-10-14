@@ -1,0 +1,97 @@
+<html>
+<head>
+    <script type="text/javascript" >
+        function ins(){
+            let data = {
+                "class_now": "没课",
+                "class_next": "升旗仪式",
+                "d_hour": 45,
+                "d_min": 41,
+                "time_msg": "现在是2023年5月27日 礼拜六 10点49分39秒",
+                "disclass_monday": [
+                    "数学",
+                    "劳技",
+                    "道法",
+                    "英语",
+                    "历史",
+                    "美术",
+                    "语文",
+                    "体育"
+                ],
+                "disclass_tuesday": [
+                    "体育",
+                    "英语",
+                    "语文",
+                    "数学",
+                    "生命",
+                    "历史",
+                    "物理",
+                    "音乐"
+                ],
+                "disclass_wednesday": [
+                    "生命",
+                    "体育",
+                    "语文",
+                    "语文",
+                    "英语",
+                    "英语",
+                    "数学",
+                    "数学"
+                ],
+                "disclass_thursday": [
+                    "历史",
+                    "语文",
+                    "体育",
+                    "物理",
+                    "英语",
+                    "道法",
+                    "生命",
+                    "数学"
+                ],
+                "disclass_friday": [
+                    "体锻",
+                    "数学",
+                    "语文",
+                    "英语",
+                    "自修",
+                    "自修",
+                    "班会"
+                ]
+            }
+            let tableObj1 = document.getElementById("table1");
+            //trObj是一个新增的行，如果不新增第0个td直接新增第1个会报错
+            for (var i = 0; i < data.disclass_monday.length; i++) {
+                let trObj1 = tableObj1.insertRow(0);
+                let tdObj1 = trObj1.insertCell(0);
+                tdObj1.innerHTML = data.disclass_monday[i];
+            }
+            let tableObj2 = document.getElementById("table2");
+            //trObj是一个新增的行，如果不新增第0个td直接新增第1个会报错
+            for (var i = 0; i < data.disclass_monday.length; i++) {
+                let trObj2 = tableObj2.insertRow(0);
+                let tdObj2 = trObj2.insertCell(0);
+                tdObj2.innerHTML = data.disclass_monday[i];
+            }
+
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <table border="1" style="width:200px;">
+            <tbody id="table1">
+
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table border="1" id="table2" style="width:200px;">
+        </table>
+    </div>
+    <input type="button" onclick="ins()" value="ins"/>
+    <script>
+        window.onload = ins();
+    </script>
+</body>
+</html>

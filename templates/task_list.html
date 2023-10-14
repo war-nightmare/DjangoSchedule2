@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+    <link rel="stylesheet"
+        href="{% static 'plugins/bootstrap-datetimepicker-1.9.0/css/bootstrap-datetimepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+    <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-datetimepicker-1.9.0/js/bootstrap-datetimepicker.js' %}"></script>
+    <script
+        src="{% static 'plugins/bootstrap-datetimepicker-1.9.0/js/locales/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+</head>
+
+<body>
+
+    <div>
+        <input type="button" class="btn btn-primary" value="click" onclick="ClickMe();"/>
+        <h1 id="status"></h1>
+    </div>
+    <script type="text/javascript">
+        function ClickMe() {
+            $.ajax({
+                url:'/task/ajax/',
+                type:'get',
+                data:{
+                    n1:123,
+                    n2:456
+                },
+                dataType:"JSON",
+                success: function (res){
+                    console.log(res.status);
+                    let txt = res.status
+                    console.log(txt)
+                    document.getElementById("status").innerHTML = txt;
+                }
+            });
+            
+            setTimeout("ClickMe()", 1000);
+
+        }
+    </script>
+</body>
+
+</html>

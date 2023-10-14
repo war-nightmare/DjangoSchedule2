@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级管理系统</title>
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+    <link rel="stylesheet"
+        href="{% static 'plugins/bootstrap-datetimepicker-1.9.0/css/bootstrap-datetimepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+    <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-datetimepicker-1.9.0/js/bootstrap-datetimepicker.js' %}"></script>
+    <script
+        src="{% static 'plugins/bootstrap-datetimepicker-1.9.0/js/locales/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+</head>
+
+<body>
+    <div class="divbar navbar-default" style="height: 80px; display:flex; justify-content:center">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img alt="Brand" src="{% static 'img/logo.png' %}" width="50"
+                        height="50"></a>
+                <a class="navbar-brand" href="#"
+                    style="font-size: 30px; font-color: rgb(0, 0, 0); margin-right: 20px; margin-top:15px">班级管理系统</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" style="font-size: 20px; font-color: gray;display: inline-block; margin-top:15px">
+                    <li><a href="../">课表管理</a></li>
+                    <li><a href="/show/">显示界面</a></li>
+                    <li><a href="/index_display/">修改显示课程</a></li>
+                    <li><a href="/index_matter/">修改事项</a></li>
+                    <li><a href="/index_attendant/">修改值日生</a></li>
+                    <li><a href="/settings/">背景设置</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 80px;">
+        <div class="container-fluid">
+            <div>
+                <div class="panel panel-default">
+                    <div class="panel-heading"> 事项列表 </div>
+                    <div class="row panel-body" style="margin-top: 20px;">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>名称</td>
+                                        <td>操作</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for obj in row_object %}
+                                    <tr>
+                                        <td>{{ obj.thematter }}</td>
+
+                                        <td>
+                                            <a class="btn btn-primary btn-xs" href="./edit/?nid={{ obj.id }}"><i
+                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i></span></a>
+                                            <a class="btn btn-danger btn-xs" href="./delete/?nid={{ obj.id }}"><i
+                                                    class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div><a class="btn btn-success btn-xs col-xs-2 col-xs-offset-1" style="margin-top:20px"
+                            href="/index_matter/add/">添加事项</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

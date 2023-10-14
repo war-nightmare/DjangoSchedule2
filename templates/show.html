@@ -1,0 +1,274 @@
+{% load static %}
+{% static "" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>班级管理系统</title>
+        <link rel="shortcut icon" href="{% static 'img/logo.png' %}">
+        <link rel="stylesheet"
+            href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+        <link rel="stylesheet"
+            href="{% static 'plugins/bootstrap-datetimepicker-1.9.0/css/bootstrap-datetimepicker.css' %}">
+        <link rel="stylesheet"
+            href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+        <script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+        <script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
+        <script
+            src="{% static 'plugins/bootstrap-datetimepicker-1.9.0/js/bootstrap-datetimepicker.js' %}"></script>
+        <script
+            src="{% static 'plugins/bootstrap-datetimepicker-1.9.0/js/locales/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+        <style>
+        .textstyle {
+            font-size: 80px;
+            text-align: center;
+            margin: 50px auto 50px;
+            font-family: Microsoft YaHei;
+        }
+
+        .bodier {
+            font-size: 80px;
+            text-align: center;
+            font-family: Microsoft YaHei;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        .table-bordered{
+            border: 5px solid #cccccc;
+            border-left: 0px !important;
+        }
+        .table-bordered th,
+        .table-bordered td {
+            border: 5px solid #cccccc !important;
+            border-left: 0px !important;
+        }
+        .div-inline {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        .tb-bd-single{
+            border: 5px solid #cccccc !important;
+        }
+        .tb-bd-single th,
+        .tb-bd-single td {
+            border: 5px solid #cccccc !important;
+        }
+        .tb-bd-single td,
+        .table-bordered td,
+        .tb-bd-single-right td {
+            backdrop-filter: blur(5px);
+        }
+        .tb-bd-single-right{
+            border: 5px solid #cccccc !important;
+            text-align: left;
+        }
+        .tb-bd-single-right th,
+        .tb-bd-single-right td {
+            border: 0px !important;
+            text-align: left;
+        }
+    </style>
+    </head>
+
+    <body
+        style="width: 100%; min-height: 100vh;background: center center no-repeat; background-size: 100% 100%; overflow:hidden;"
+        id="bgimg">
+        <div class="row col-xs-12">
+            <div>
+                <div class="row col-xs-8">
+                    <div class="col-xs-2 col-xs-offset-1 div-inline">
+                        <table class="table tb-bd-single">
+                            <tbody class="bodier" id="monday">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-2 div-inline">
+                        <table class="table table-bordered">
+                            <tbody class="bodier" id="tuesday">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-2 div-inline">
+                        <table class="table table-bordered">
+                            <tbody class="bodier" id="wednesday">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-2 div-inline">
+                        <table class="table table-bordered">
+                            <tbody class="bodier" id="thursday">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-2 div-inline">
+                        <table class="table table-bordered">
+                            <tbody class="bodier" id="friday">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-xs-4">
+                <div class="row col-xs-11" style="margin-bottom: 100px;">
+                    <div>
+                        <table class="table tb-bd-single-right">
+                            <tbody class="bodier" id="matters">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row col-xs-1"></div>
+                <div class="row col-xs-11">
+                    <div>
+                        <table class="table tb-bd-single-right">
+                            <tbody class="bodier">
+                                <tr id="attendants"></tr>
+                                <tr id="masters"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <center>
+            <div>
+                <div>
+                    <table style="padding: 0px 50px;">
+                        <tbody class="textstyle">
+                            <tr id="time_msg" class="textstyle" style="backdrop-filter: blur(5px);"></tr>
+                            <tr id="class_now" class="textstyle" style="backdrop-filter: blur(5px);"></tr>
+                            <tr id="class_next" class="textstyle" style="backdrop-filter: blur(5px);"></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </center>
+        <script type="text/javascript">
+        function refresh_data() {
+            $.ajax({
+                url: '/show/api/',
+                type: 'get',
+                dataType: "JSON",
+                success: function (res) {
+                    console.log(res);
+
+                    document.getElementById("bgimg").style.backgroundImage = 'url(\"' + {{baseUrl}} + 'img/bgimg/' + res.bgimg + '\")';
+
+                    document.getElementById("monday").innerHTML = "";
+                    document.getElementById("tuesday").innerHTML = "";
+                    document.getElementById("wednesday").innerHTML = "";
+                    document.getElementById("thursday").innerHTML = "";
+                    document.getElementById("friday").innerHTML = "";
+                    document.getElementById("matters").innerHTML = "";
+                    document.getElementById("attendants").innerHTML = "";
+                    document.getElementById("masters").innerHTML = "";
+                    document.getElementById("time_msg").innerHTML = "";
+                    document.getElementById("class_now").innerHTML = "";
+                    document.getElementById("class_next").innerHTML = "";
+
+
+                    let tableObj1 = document.getElementById("monday");
+                    for (var i = 0; i < res.disclass_monday.length; i++) {
+                        let trObj1 = tableObj1.insertRow(0);
+                        let tdObj1 = trObj1.insertCell(0);
+                        tdObj1.innerHTML = res.disclass_monday[res.disclass_monday.length - i - 1];
+                    }
+
+                    let tableObj2 = document.getElementById("tuesday");
+                    for (var i = 0; i < res.disclass_tuesday.length; i++) {
+                        let trObj2 = tableObj2.insertRow(0);
+                        let tdObj2 = trObj2.insertCell(0);
+                        tdObj2.innerHTML = res.disclass_tuesday[res.disclass_tuesday.length - i - 1];
+                    }
+
+                    let tableObj3 = document.getElementById("wednesday");
+                    for (var i = 0; i < res.disclass_wednesday.length; i++) {
+                        let trObj3 = tableObj3.insertRow(0);
+                        let tdObj3 = trObj3.insertCell(0);
+                        tdObj3.innerHTML = res.disclass_wednesday[res.disclass_wednesday.length - i - 1];
+                    }
+
+                    let tableObj4 = document.getElementById("thursday");
+                    for (var i = 0; i < res.disclass_thursday.length; i++) {
+                        let trObj4 = tableObj4.insertRow(0);
+                        let tdObj4 = trObj4.insertCell(0);
+                        tdObj4.innerHTML = res.disclass_thursday[res.disclass_thursday.length - i - 1];
+                    }
+
+                    let tableObj5 = document.getElementById("friday");
+                    for (var i = 0; i < res.disclass_friday.length; i++) {
+                        let trObj5 = tableObj5.insertRow(0);
+                        let tdObj5 = trObj5.insertCell(0);
+                        tdObj5.innerHTML = res.disclass_friday[res.disclass_friday.length - i -1];
+                    }
+
+                    let tableObj6 = document.getElementById("matters");
+                    for (var i = 0; i < res.matters.length; i++) {
+                        let trObj6 = tableObj6.insertRow(0);
+                        let tdObj6 = trObj6.insertCell(0);
+                        tdObj6.innerHTML = res.matters[i];
+                    }
+
+                    let tableObj7 = document.getElementById("attendants");
+                    let tdObj7 = tableObj7.insertCell(0);
+                    let e1 = "值日生："
+                    for (var i = 0; i < res.attendants.length; i++) {
+                        if (i == res.attendants.length-1){
+                            e1 = e1 + res.attendants[i];
+                        }
+                        else{
+                            e1 = e1 + res.attendants[i] + "、";
+                        }
+                    tdObj7.innerHTML = e1;
+                    }
+
+                    let tableObj8 = document.getElementById("masters");
+                    let tdObj8 = tableObj8.insertCell(0);
+                    let e2 = "值日班长："
+                    for (var i = 0; i < res.masters.length; i++) {
+                        if (i == res.masters.length-1){
+                            e2 = e2 + res.masters[i];
+                        }
+                        else{
+                            e2 = e2 + res.masters[i] + "、";
+                        }
+                    tdObj8.innerHTML = e2;
+                    }
+                    let tableObj9 = document.getElementById("time_msg");
+                    let tdObj9 = tableObj9.insertCell(0);
+                    let e3 = ""
+                    e3 = e3 + res.time_msg;
+                    tdObj9.innerHTML = e3;
+
+                    let tableObj10 = document.getElementById("class_now");
+                    let tdObj10 = tableObj10.insertCell(0);
+                    let e4 = "现在是"
+                    e4 = e4 + res.class_now;
+                    tdObj10.innerHTML = e4;
+
+                    let tableObj11 = document.getElementById("class_next");
+                    let tdObj11 = tableObj11.insertCell(0);
+                    let e5 = "现在距"
+                    e5 = e5 + res.class_next + "还有" + res.d_hour + "时" + res.d_min + "分";
+                    tdObj11.innerHTML = e5;
+                }
+            });
+
+            setTimeout("refresh_data()", 1000);
+
+        };
+        window.onload = refresh_data();
+    </script>
+    </body>
+
+</html>
