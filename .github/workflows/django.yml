@@ -26,4 +26,5 @@ jobs:
     - name: Run Django Development Server
       run: |
         python manage.py migrate
-        python manage.py runserver 0.0.0.0:8000
+        python manage.py runserver 0.0.0.0:8000 --verbosity 2
+      timeout-minutes: 5
