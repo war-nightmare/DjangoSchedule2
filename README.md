@@ -1,7 +1,7 @@
 # 关于 DjangoSchedule2
 
 
-![](https://img.shields.io/badge/python-3.9.2-blue.svg?logo=python) ![](https://img.shields.io/badge/django-4.2.4-green.svg?logo=django) ![](https://img.shields.io/badge/sqlite3-red.svg?logo=sqlite)
+![](https://img.shields.io/badge/python-3.9.2-3776AB.svg?logo=python) ![](https://img.shields.io/badge/django-4.2.4-092E20.svg?logo=django) ![](https://img.shields.io/badge/sqlite3-003B57.svg?logo=sqlite) ![](https://img.shields.io/badge/HTML5-E34F26.svg?logo=html5) ![](https://img.shields.io/badge/jquery-3.6.3-0769AD.svg?logo=jquery) ![](https://img.shields.io/badge/bootstrap-3.4.1-7952B3.svg?logo=bootstrap) ![](https://img.shields.io/badge/bootstrap_datetimepicker-1.9.0-brown.svg?logo=bootstrap) ![](https://img.shields.io/badge/font_awesome-4.7.0-528DD7.svg?logo=fontawesome)
 
 DjangoSchedule2 是 DjangoSchedule 的二代版本，是一款使用 Python 开发的，针对Seewo及其教学一体机设计的，用于显示教学信息的壁纸软件。
 
