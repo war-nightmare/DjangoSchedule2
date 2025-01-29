@@ -14,8 +14,9 @@ DjangoSchedule2 使用 django 库，本地搭建服务器，客户端需使用 W
 
 ```bat
 python manage.py runserver <port>
-#<port>默认为22424，下同
 ```
+
+#<port>默认为22424，下同
 
 浏览器打开 ```127.0.0.1/<port>``` 
 
